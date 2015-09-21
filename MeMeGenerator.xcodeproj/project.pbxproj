@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1A81AEE1BB09574007709BF /* MeMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A81AED1BB09574007709BF /* MeMe.swift */; };
 		E1E101E11BAA0F71004A3B49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E101E01BAA0F71004A3B49 /* AppDelegate.swift */; };
 		E1E101E31BAA0F71004A3B49 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E101E21BAA0F71004A3B49 /* ViewController.swift */; };
 		E1E101E61BAA0F71004A3B49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1E101E41BAA0F71004A3B49 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1A81AED1BB09574007709BF /* MeMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeMe.swift; sourceTree = "<group>"; };
 		E1E101DB1BAA0F71004A3B49 /* MeMeGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeMeGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E101DF1BAA0F71004A3B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1E101E01BAA0F71004A3B49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				E1E101E01BAA0F71004A3B49 /* AppDelegate.swift */,
 				E1E101E21BAA0F71004A3B49 /* ViewController.swift */,
+				E1A81AED1BB09574007709BF /* MeMe.swift */,
 				E1E101E41BAA0F71004A3B49 /* Main.storyboard */,
 				E1E101E71BAA0F71004A3B49 /* Images.xcassets */,
 				E1E101E91BAA0F71004A3B49 /* LaunchScreen.xib */,
@@ -214,6 +217,7 @@
 			files = (
 				E1E101E31BAA0F71004A3B49 /* ViewController.swift in Sources */,
 				E1E101E11BAA0F71004A3B49 /* AppDelegate.swift in Sources */,
+				E1A81AEE1BB09574007709BF /* MeMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,7 @@
 				E1E101FC1BAA0F72004A3B49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1E101FD1BAA0F72004A3B49 /* Build configuration list for PBXNativeTarget "MeMeGeneratorTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				E1E101FF1BAA0F72004A3B49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

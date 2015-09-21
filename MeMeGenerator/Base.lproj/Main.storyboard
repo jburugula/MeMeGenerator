@@ -26,13 +26,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wth-g4-Po7"/>
                                     <barButtonItem systemItem="camera" id="Y9H-NH-DoO">
                                         <connections>
-                                            <action selector="TakePictureWithCamera:" destination="vXZ-lx-hvc" id="FYz-mw-9tR"/>
+                                            <action selector="takePictureWithCamera:" destination="vXZ-lx-hvc" id="6Ef-MW-bxz"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="lf0-Jo-TN9"/>
                                     <barButtonItem title="Album" id="cKt-8J-XcG">
                                         <connections>
-                                            <action selector="SelectImageFromAlbum:" destination="vXZ-lx-hvc" id="34S-6n-eit"/>
+                                            <action selector="selectImageFromAlbum:" destination="vXZ-lx-hvc" id="HGU-Gd-F0W"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="zak-BG-9Rd"/>
@@ -44,25 +44,25 @@
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="zT8-qN-hIL"/>
                                     <barButtonItem systemItem="action" id="Toe-I3-EW6">
                                         <connections>
-                                            <action selector="ShareBtnClicked:" destination="vXZ-lx-hvc" id="A5H-AP-SOz"/>
+                                            <action selector="shareBtnClicked:" destination="vXZ-lx-hvc" id="gMK-T2-3c2"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="sOo-ol-fV3"/>
                                     <barButtonItem title="Cancel" id="RK9-A0-da2">
                                         <connections>
-                                            <action selector="CancelBtnClicked:" destination="vXZ-lx-hvc" id="5nk-ac-HH6"/>
+                                            <action selector="cancelBtnClicked:" destination="vXZ-lx-hvc" id="yYE-IG-IdP"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="XYP-da-GVP"/>
                                 </items>
                             </toolbar>
-                            <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="oEw-Ev-wAp">
+                            <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="oEw-Ev-wAp">
                                 <rect key="frame" x="53" y="81" width="520" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8zH-Rx-w9z">
+                            <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8zH-Rx-w9z">
                                 <rect key="frame" x="53" y="489" width="520" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -30,50 +30,45 @@ UITextFieldDelegate{
     
     var memedImage : UIImage?
     
-  
-    struct Meme {
-        var TopText:String?
-        var BottomText:String?
-        var originalImage:UIImage?
-        var memedImage:UIImage!
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib
-       
+        
         // Setup Top and Bottom text field properties
         
-        setTextFieldAttributes()
+        setTextFieldAttributes(TopText)
+        setTextFieldAttributes(BottomText)
         
         
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
         if let  selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            self.showImage.image = selectedImage
+            showImage.image = selectedImage
             showImage.contentMode =
                 UIViewContentMode.ScaleAspectFill
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+    // Generate the new MeMe image from original image
     
     func generateMemedImage() -> UIImage
     {
-        self.TopToolbar.hidden = true
-        self.BottomToolbar.hidden = true
+        TopToolbar.hidden = true
+        BottomToolbar.hidden = true
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         
-        self.view.drawViewHierarchyInRect(self.view.frame,
+        view.drawViewHierarchyInRect(self.view.frame,
             afterScreenUpdates: true)
         
         memedImage  =
@@ -81,24 +76,21 @@ UITextFieldDelegate{
         
         UIGraphicsEndImageContext()
         
-        
         return memedImage!
     }
     
-    @IBAction func TakePictureWithCamera(sender: AnyObject) {
-      
-        // Take picture with camera
+    @IBAction func takePictureWithCamera(sender: AnyObject) {
         
         pickImageFromSource("Camera")
     }
     
-    @IBAction func SelectImageFromAlbum(sender: AnyObject) {
+    @IBAction func selectImageFromAlbum(sender: AnyObject) {
         
-       // Select image from camera roll
+        // Select image from camera roll
         
         pickImageFromSource("Album")
-        
     }
+    
     
     func save() {
         
@@ -106,14 +98,13 @@ UITextFieldDelegate{
         var meme = Meme(TopText: TopText.text!, BottomText: BottomText.text!, originalImage: showImage.image!, memedImage: memedImage)
     }
     
-    @IBAction func ShareBtnClicked(sender: AnyObject) {
-        
+    @IBAction func shareBtnClicked(sender: AnyObject) {
         generateMemedImage()
         
         let shareMeme:UIImage = memedImage!
         let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [shareMeme], applicationActivities: nil)
         
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        presentViewController(activityViewController, animated: true, completion: nil)
         
         activityViewController.completionWithItemsHandler = {
             activityType, completed, returnedItems, activityError in
@@ -124,32 +115,31 @@ UITextFieldDelegate{
             self.BottomToolbar.hidden = false
             
         }
-        
-    }
-    
-    @IBAction func CancelBtnClicked(sender: AnyObject) {
-        
-        self.showImage.image = nil
-        setTextFieldAttributes()
-        
     }
     
     
-    //subscribe
+    @IBAction func cancelBtnClicked(sender: AnyObject) {
+        showImage.image = nil
+        setTextFieldAttributes(TopText)
+        setTextFieldAttributes(BottomText)
+    }
+    
+    
+    //subscribe to Keyboard Notification
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
         
         CameraBtn.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
     }
     
     
-    //Unsubscribe
+    //Unsubscribe to Keyboard Notification
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     
@@ -159,6 +149,7 @@ UITextFieldDelegate{
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    
     func unsubscribeFromKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name:
             UIKeyboardWillShowNotification, object: nil)
@@ -167,25 +158,28 @@ UITextFieldDelegate{
         
     }
     
+    
     func keyboardWillShow(notification: NSNotification) {
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if BottomText.isFirstResponder() {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
     }
+    
     
     func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y += getKeyboardHeight(notification)
+        view.frame.origin.y = 0
     }
     
+    
+    // Get the height of the keyboard
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        if BottomText.isFirstResponder() {
-            return keyboardSize.CGRectValue().height
-        } else {
-            
-            return 0
-        }
+        return keyboardSize.CGRectValue().height
+        
     }
+    
     
     // Don't clear the text upon editing after the first time
     
@@ -200,9 +194,10 @@ UITextFieldDelegate{
         return true
     }
     
+    
     // set the display propertis for TOP and BOTTOM text fields
     
-    func setTextFieldAttributes(){
+    func setTextFieldAttributes(textField: UITextField){
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName :UIColor.blackColor(),
@@ -211,38 +206,37 @@ UITextFieldDelegate{
             NSStrokeWidthAttributeName :-2.0
         ]
         
-        TopText.text = "TOP"
-        TopText.defaultTextAttributes = memeTextAttributes
-        TopText.clearsOnBeginEditing = true
-        TopText.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.clearsOnBeginEditing = true
+        textField.delegate = self
+        textField.backgroundColor = UIColor.clearColor()
         
-        BottomText.text = "BOTTOM"
-        BottomText.defaultTextAttributes = memeTextAttributes
-        BottomText.clearsOnBeginEditing = true
-        BottomText.delegate = self
-        
-        
+        if (textField == TopText) {
+            textField.text = "TOP"
+        }
+        else {
+            textField.text = "BOTTOM"
+        }
     }
     
     
     // Pick Image from Source
     
     func pickImageFromSource(sourceType: String?){
-    
-    let pickImageController = UIImagePickerController()
-    pickImageController.delegate = self
-    if (sourceType == "Album"){
-       pickImageController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-    }
-    else if (sourceType == "Camera"){
-    pickImageController.sourceType = UIImagePickerControllerSourceType.Camera
-    
-    }
-    pickImageController.allowsEditing = false
-    self.presentViewController( pickImageController, animated: true, completion: nil)
-    
-    
-    
+        
+        let pickImageController = UIImagePickerController()
+        pickImageController.delegate = self
+        if (sourceType == "Album"){
+            pickImageController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        }
+        else if (sourceType == "Camera"){
+            pickImageController.sourceType = UIImagePickerControllerSourceType.Camera
+            
+        }
+        pickImageController.allowsEditing = false
+        presentViewController( pickImageController, animated: true, completion: nil)
+
+        
     }
     
     
